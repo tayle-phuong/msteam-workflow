@@ -273,6 +273,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  APP_ID = ENV["APP_ID"]
+  APP_SECRET = ENV["APP_SECRET"]
+  config.omniauth :azure_activedirectory_v2, client_id: APP_ID, client_secret: APP_SECRET
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

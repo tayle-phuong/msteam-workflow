@@ -70,3 +70,6 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "omniauth-azure-activedirectory-v2", "~> 2.3"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
