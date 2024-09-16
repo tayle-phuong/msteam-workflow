@@ -58,13 +58,15 @@ class WorkflowsController < ApplicationController
   end
 
   def send_cheer
-    WorkflowService.new(user: current_user, params:, workflow: @workflow).send_cheer
-    redirect_to @workflow, notice: t("Send Cheer Success")
+    result, success = WorkflowService.new(user: current_user, params:, workflow: @workflow).send_cheer
+    flash[success ? :notice : :alert] = result
+    redirect_to @workflow
   end
 
   def send_survey
-    WorkflowService.new(user: current_user, params:, workflow: @workflow).send_survey
-    redirect_to @workflow, notice: t("Send Survey Success")
+    result, success = WorkflowService.new(user: current_user, params:, workflow: @workflow).send_survey
+    flash[success ? :notice : :alert] = result
+    redirect_to @workflow
   end
 
   private

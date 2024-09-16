@@ -7,23 +7,29 @@ class WorkflowService
 
   def send_cheer
     @body = send_cheer_body.to_json
-    Rails.logger.info send_request
+
+    send_request
+
+    response
   end
 
   def send_survey
     @body = send_survey_body.to_json
-    Rails.logger.info send_request
+
+    send_request
+
+    response
   end
 
   private
 
-  attr_reader :user, :params, :body, :workflow
+  attr_reader :user, :params, :body, :workflow, :request
 
   delegate :token, to: :user
   delegate :url, to: :workflow
 
   def send_request
-    Faraday.post(url) do |req|
+    @request = Faraday.post(url) do |req|
       req.params['api-version'] = "2016-06-01"
       req.headers['Content-Type'] = 'application/json'
       req.headers['Authorization'] = "Bearer #{token}"
@@ -49,5 +55,11 @@ class WorkflowService
         }
       ],
     }
+  end
+
+  def response
+    return ["Success", true] if request.success?
+
+    [JSON.parse(request.body).with_indifferent_access.dig("error", "message"), false]
   end
 end
