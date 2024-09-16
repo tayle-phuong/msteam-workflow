@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MsteamWorkflow</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>MsteamWorkflow</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if signed_in? %>
-      <%= link_to current_user.email, edit_user_registration_path %>
-      <%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: "false" } %>
-    <% else %>
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Register", new_user_registration_path %>
-    <% end %>
-    <%= yield %>
-  </body>
+<body class="bg-gray-100 min-h-screen">
+<p class="notice text-green-600 mb-4"><%= notice %></p>
+<p class="alert text-red-600 mb-4"><%= alert %></p>
+
+<div class="flex items-center justify-between p-4 bg-white shadow-md mb-6">
+  <% if signed_in? %>
+    <div class="flex items-center space-x-4">
+      <%= link_to current_user.email, edit_user_registration_path, class: "text-blue-500 hover:text-blue-700 underline" %>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: "false" }, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700" %>
+    </div>
+  <% else %>
+    <div class="flex items-center space-x-4">
+      <%= link_to "Log in", new_user_session_path, class: "text-blue-500 hover:text-blue-700 underline" %>
+      <%= link_to "Register", new_user_registration_path, class: "text-blue-500 hover:text-blue-700 underline" %>
+    </div>
+  <% end %>
+  <%= link_to "Workflows", workflows_path, class: "text-blue-500 hover:text-blue-700 underline" %>
+</div>
+
+<div class="container mx-auto px-4">
+  <%= yield %>
+</div>
+</body>
 </html>

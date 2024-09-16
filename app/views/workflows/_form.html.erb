@@ -1,0 +1,27 @@
+<%= form_with(model: workflow, local: true, class: "space-y-6") do |form| %>
+  <% if workflow.errors.any? %>
+    <div class="bg-red-100 text-red-700 p-4 rounded">
+      <h2 class="text-lg font-bold"><%= pluralize(workflow.errors.count, "error") %> prohibited this workflow from being saved:</h2>
+
+      <ul class="list-disc ml-5">
+        <% workflow.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :url, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :url, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "px-4 py-2 bg-indigo-500 text-white font-bold rounded hover:bg-indigo-700" %>
+  </div>
+<% end %>
