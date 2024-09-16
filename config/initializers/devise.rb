@@ -275,7 +275,10 @@ Devise.setup do |config|
 
   APP_ID = ENV["APP_ID"]
   APP_SECRET = ENV["APP_SECRET"]
-  config.omniauth :azure_activedirectory_v2, client_id: APP_ID, client_secret: APP_SECRET
+  config.omniauth :azure_activedirectory_v2,
+                  client_id: APP_ID,
+                  client_secret: APP_SECRET,
+                  scope: "https://service.flow.microsoft.com//.default"
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

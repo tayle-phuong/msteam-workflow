@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_073156) do
     t.string "uid"
     t.string "provider"
     t.string "token"
+    t.json "raw_info"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

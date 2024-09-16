@@ -7,7 +7,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       password: Devise.friendly_token[0, 20],
       uid: request.env['omniauth.auth']['uid'],
       provider: request.env['omniauth.auth']['provider'],
-      token: request.env['omniauth.auth']['credentials']['token']
+      token: request.env['omniauth.auth']['credentials']['token'],
+      raw_info: request.env['omniauth.auth']['extra']['raw_info']
     )
     if @user.persisted?
       flash[:notice] = "success"

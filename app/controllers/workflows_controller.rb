@@ -1,5 +1,5 @@
 class WorkflowsController < ApplicationController
-  before_action :set_workflow, only: %i[ show edit update destroy ]
+  before_action :set_workflow, only: %i[ show edit update destroy send_cheer]
 
   # GET /workflows or /workflows.json
   def index

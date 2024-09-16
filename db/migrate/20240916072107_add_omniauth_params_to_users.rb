@@ -3,5 +3,6 @@ class AddOmniauthParamsToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :uid, :string
     add_column :users, :provider, :string
     add_column :users, :token, :string
+    add_column :users, :raw_info, :json
   end
 end
