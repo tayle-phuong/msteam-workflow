@@ -57,6 +57,11 @@ class WorkflowsController < ApplicationController
     end
   end
 
+  def send_cheer
+    WorkflowService.new(user: current_user, params:, workflow: @workflow).send_cheer
+    redirect_to @workflow, notice: t("Send Success")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workflow
