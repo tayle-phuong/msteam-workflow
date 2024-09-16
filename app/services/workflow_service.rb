@@ -21,6 +21,14 @@ class WorkflowService
     response
   end
 
+  def send_auto
+    @body = send_auto_body.to_json
+
+    send_request
+
+    response
+  end
+
   private
 
   attr_reader :user, :params, :body, :workflow, :request
@@ -54,6 +62,84 @@ class WorkflowService
           email: "lp.wanw@lpwanw.onmicrosoft.com"
         }
       ],
+    }
+  end
+
+  def send_auto_body
+    {
+      type: "message",
+      flow_type: "auto",
+      items: [
+        {
+          recipient: "lp.wanw@lpwanw.onmicrosoft.com",
+          queries: {
+            my_id: "my_id",
+          },
+          submit_url: "https://msteam-workflow.onrender.com/workflows/1",
+          message: {
+            type: "AdaptiveCard",
+            body: [
+              {
+                "type": "TextBlock",
+                "size": "Medium",
+                "weight": "Bolder",
+                "text": "You have received a Survey!"
+              },
+              {
+                "type": "TextBlock",
+                "text": params[:question],
+                "wrap": true
+              },
+              {
+                "type": "ColumnSet",
+                "columns": [
+                  {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                      {
+                        "id": "scale",
+                        "type": "Input.ChoiceSet",
+                        "choices": [
+                          {
+                            "title": "1",
+                            "value": "1"
+                          },
+                          {
+                            "title": "2",
+                            "value": "2"
+                          },
+                          {
+                            "title": "3",
+                            "value": "3"
+                          },
+                          {
+                            "title": "4",
+                            "value": "4"
+                          },
+                          {
+                            "title": "5",
+                            "value": "5"
+                          }
+                        ],
+                        "placeholder": "Placeholder text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "version": "1.4",
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "Choose"
+              }
+            ]
+          }
+        }
+      ]
     }
   end
 

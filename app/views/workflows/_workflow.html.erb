@@ -18,6 +18,9 @@
         <li class="me-2" role="presentation">
           <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Survey</button>
         </li>
+        <li class="me-2" role="presentation">
+          <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="auto-tab" data-tabs-target="#auto" type="button" role="tab" aria-controls="auto" aria-selected="false">Auto</button>
+        </li>
       </ul>
     </div>
     <div id="default-tab-content">
@@ -42,6 +45,17 @@
         <%= form_tag send_survey_workflow_path(workflow), method: :post, class: "space-y-4 p-4 bg-gray-100 rounded-lg shadow-md" do %>
           <div>
             <%= submit_tag 'Send Survey', class: "px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="auto" role="tabpanel" aria-labelledby="auto-tab">
+        <%= form_tag send_auto_workflow_path(workflow), method: :post, class: "space-y-4 p-4 bg-gray-100 rounded-lg shadow-md" do %>
+          <div class="flex flex-col">
+            <%= label_tag :question, 'Question:', class: "text-lg font-medium mb-2" %>
+            <%= text_field_tag :question, nil, class: "p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+          </div>
+          <div>
+            <%= submit_tag 'auto Survey', class: "px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
           </div>
         <% end %>
       </div>
