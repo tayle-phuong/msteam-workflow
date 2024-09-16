@@ -1,5 +1,5 @@
 class WorkflowsController < ApplicationController
-  before_action :set_workflow, only: %i[ show edit update destroy send_cheer]
+  before_action :set_workflow, only: %i[ show edit update destroy send_cheer send_survey]
 
   # GET /workflows or /workflows.json
   def index
@@ -59,7 +59,12 @@ class WorkflowsController < ApplicationController
 
   def send_cheer
     WorkflowService.new(user: current_user, params:, workflow: @workflow).send_cheer
-    redirect_to @workflow, notice: t("Send Success")
+    redirect_to @workflow, notice: t("Send Cheer Success")
+  end
+
+  def send_survey
+    WorkflowService.new(user: current_user, params:, workflow: @workflow).send_survey
+    redirect_to @workflow, notice: t("Send Survey Success")
   end
 
   private

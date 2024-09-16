@@ -10,6 +10,11 @@ class WorkflowService
     Rails.logger.info send_request
   end
 
+  def send_survey
+    @body = send_survey_body.to_json
+    Rails.logger.info send_request
+  end
+
   private
 
   attr_reader :user, :params, :body, :workflow
@@ -31,6 +36,18 @@ class WorkflowService
       type: "message",
       flow_type: "cheer",
       message: "#{params[:to]} received a Cheer from #{params[:from]}"
+    }
+  end
+
+  def send_survey_body
+    {
+      type: "message",
+      flow_type: "survey",
+      receivers: [
+        {
+          email: "lp.wanw@lpwanw.onmicrosoft.com"
+        }
+      ],
     }
   end
 end

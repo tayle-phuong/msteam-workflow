@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :workflows do
     member do
-      post :send_cheer
+      post :send_cheer, :send_survey
     end
   end
 
