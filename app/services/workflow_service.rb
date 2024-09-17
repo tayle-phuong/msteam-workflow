@@ -80,6 +80,7 @@ class WorkflowService
             "X-Token": "lp.wanw@lpwanw.onmicrosoft.com",
           },
           submit_url: "#{ENV["HOST_URL"]}/submit",
+          question: params[:question],
           message: {
             type: "AdaptiveCard",
             body: [
