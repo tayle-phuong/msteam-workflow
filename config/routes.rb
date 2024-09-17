@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :submit, controller: :submit, only: %i[create]
+  resource :submit, controller: :submit, only: %i[create] do
+    get "/", to: "submits#index"
+  end
 
   resource :me, controller: :me, only: %i[show]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

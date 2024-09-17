@@ -59,6 +59,7 @@ class WorkflowService
       flow_type: "survey",
       receivers: [
         {
+          submit_url: "#{ENV["HOST_URL"]}/submit",
           email: "lp.wanw@lpwanw.onmicrosoft.com"
         }
       ],
@@ -78,7 +79,7 @@ class WorkflowService
           headers: {
             "X-Token": "lp.wanw@lpwanw.onmicrosoft.com",
           },
-          submit_url: "https://c197-113-22-170-101.ngrok-free.app/submit",
+          submit_url: "#{ENV["HOST_URL"]}/submit",
           message: {
             type: "AdaptiveCard",
             body: [

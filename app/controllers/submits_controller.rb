@@ -1,4 +1,5 @@
 class SubmitsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_submit, only: %i[ show destroy ]
 
   # GET /submits or /submits.json
