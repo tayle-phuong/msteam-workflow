@@ -1,0 +1,6 @@
+<div id="<%= dom_id submit %>" class="p-4 border border-gray-200 rounded-lg shadow-sm mb-4">
+  <p class="text-lg">
+    <strong class="font-semibold">Data:</strong>
+  </p>
+  <pre class="bg-gray-100 p-4 rounded-lg overflow-auto text-sm"><%= JSON.pretty_generate(submit.data) %></pre>
+</div>

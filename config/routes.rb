@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :submits, only: %i[index show destroy]
   resources :workflows do
     member do
       post :send_cheer, :send_survey, :send_auto
     end
   end
+
+  resource :submit, controller: :submit, only: %i[create]
 
   resource :me, controller: :me, only: %i[show]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

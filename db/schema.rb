@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_073156) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_023205) do
+  create_table "submits", force: :cascade do |t|
+    t.json "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -28,10 +34,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_073156) do
   end
 
   create_table "workflows", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.string "url"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_workflows_on_user_id"
   end
 
+  add_foreign_key "workflows", "users"
 end

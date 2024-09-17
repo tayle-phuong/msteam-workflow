@@ -75,7 +75,10 @@ class WorkflowService
           queries: {
             my_id: "my_id",
           },
-          submit_url: "https://msteam-workflow.onrender.com/workflows/1",
+          headers: {
+            "X-Token": "lp.wanw@lpwanw.onmicrosoft.com",
+          },
+          submit_url: "https://c197-113-22-170-101.ngrok-free.app/submit",
           message: {
             type: "AdaptiveCard",
             body: [
@@ -98,7 +101,50 @@ class WorkflowService
                     "width": "stretch",
                     "items": [
                       {
-                        "id": "scale",
+                        "id": "answer1",
+                        "type": "Input.ChoiceSet",
+                        "choices": [
+                          {
+                            "title": "1",
+                            "value": "1"
+                          },
+                          {
+                            "title": "2",
+                            "value": "2"
+                          },
+                          {
+                            "title": "3",
+                            "value": "3"
+                          },
+                          {
+                            "title": "4",
+                            "value": "4"
+                          },
+                          {
+                            "title": "5",
+                            "value": "5"
+                          }
+                        ],
+                        "placeholder": "Placeholder text"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "TextBlock",
+                "text": params[:question],
+                "wrap": true
+              },
+              {
+                "type": "ColumnSet",
+                "columns": [
+                  {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                      {
+                        "id": "answer2",
                         "type": "Input.ChoiceSet",
                         "choices": [
                           {

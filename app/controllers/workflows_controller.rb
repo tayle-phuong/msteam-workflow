@@ -3,7 +3,7 @@ class WorkflowsController < ApplicationController
 
   # GET /workflows or /workflows.json
   def index
-    @workflows = Workflow.all
+    @workflows = current_user.workflows.order(id: :desc)
   end
 
   # GET /workflows/1 or /workflows/1.json
@@ -21,7 +21,7 @@ class WorkflowsController < ApplicationController
 
   # POST /workflows or /workflows.json
   def create
-    @workflow = Workflow.new(workflow_params)
+    @workflow = current_user.workflows.new(workflow_params)
 
     respond_to do |format|
       if @workflow.save
@@ -78,7 +78,7 @@ class WorkflowsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workflow
-      @workflow = Workflow.find(params[:id])
+      @workflow = current_user.workflows.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
