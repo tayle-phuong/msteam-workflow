@@ -17,7 +17,8 @@ class SubmitController < ActionController::API
   end
 
   def authenticate_headers!
-    return if request.headers['X-Token'] == ENV['TOKEN']
+    @user = User.find_by(email: request.headers['X-Token'])
+    return if @user
 
     render json: {}, status: :unauthorized
   end

@@ -33,7 +33,7 @@ class WorkflowService
 
   attr_reader :user, :params, :body, :workflow, :request
 
-  delegate :token, to: :user
+  delegate :token, :email, to: :user
   delegate :url, to: :workflow
 
   def send_request
@@ -60,7 +60,7 @@ class WorkflowService
       receivers: [
         {
           submit_url: "#{ENV["HOST_URL"]}/submit",
-          email: "lp.wanw@lpwanw.onmicrosoft.com"
+          email:
         }
       ],
     }
@@ -72,12 +72,12 @@ class WorkflowService
       flow_type: "auto",
       items: [
         {
-          recipient: "lp.wanw@lpwanw.onmicrosoft.com",
+          recipient: email,
           queries: {
             my_id: "my_id",
           },
           headers: {
-            "X-Token": "lp.wanw@lpwanw.onmicrosoft.com",
+            "X-Token": email,
           },
           submit_url: "#{ENV["HOST_URL"]}/submit",
           question: params[:question],
