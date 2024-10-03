@@ -38,17 +38,15 @@ class WorkflowService
 
   def send_request
     @request = Faraday.post(url) do |req|
-      req.params['api-version'] = "2016-06-01"
+      # req.params['api-version'] = "2016-06-01"
       req.headers['Content-Type'] = 'application/json'
-      req.headers['Authorization'] = "Bearer #{token}"
+      # req.headers['Authorization'] = "Bearer #{token}"
       req.body = body
     end
   end
 
   def send_cheer_body
     {
-      type: "message",
-      flow_type: "cheer",
       message: "#{params[:to]} received a Cheer from #{params[:from]}"
     }
   end

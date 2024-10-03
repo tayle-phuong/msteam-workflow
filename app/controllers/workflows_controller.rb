@@ -1,5 +1,8 @@
 class WorkflowsController < ApplicationController
   before_action :set_workflow, only: %i[ show edit update destroy send_cheer send_survey send_auto]
+  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :authenticate_user!, only: [:create]
+  before_action :doorkeeper_authorize!, only: [:create]
 
   # GET /workflows or /workflows.json
   def index
@@ -21,16 +24,12 @@ class WorkflowsController < ApplicationController
 
   # POST /workflows or /workflows.json
   def create
-    @workflow = current_user.workflows.new(workflow_params)
+    @workflow = current_resource_owner.workflows.new(workflow_params)
 
-    respond_to do |format|
-      if @workflow.save
-        format.html { redirect_to @workflow, notice: "Workflow was successfully created." }
-        format.json { render :show, status: :created, location: @workflow }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @workflow.errors, status: :unprocessable_entity }
-      end
+    if @workflow.save
+      render json: @workflow, status: :created
+    else
+      render json: @workflow.errors, status: :unprocessable_entity
     end
   end
 
@@ -84,5 +83,9 @@ class WorkflowsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def workflow_params
       params.require(:workflow).permit(:url, :name)
+    end
+
+    def current_resource_owner
+      User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
     end
 end

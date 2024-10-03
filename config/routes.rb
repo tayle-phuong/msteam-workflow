@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   resources :submits, only: %i[index show destroy]
   resources :workflows do
     member do
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   resource :submit, controller: :submit, only: %i[create] do
-    get "/", to: "submits#index"
+    get '/', to: 'submits#index'
   end
 
   resource :me, controller: :me, only: %i[show]
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
-  root "home#index"
+  root 'home#index'
 end
