@@ -1,0 +1,14 @@
+development:
+  keep_me_alive:
+    class: KeepMeAliveJob
+    queue: background
+    schedule: every minute
+production:
+  keep_me_alive:
+    class: KeepMeAliveJob
+    queue: background
+    schedule: every minute
+#   periodic_command:
+#     command: "SoftDeletedRecord.due.delete_all"
+#     priority: 2
+#     schedule: at 5am every day
